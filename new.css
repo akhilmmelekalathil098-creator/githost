@@ -1,70 +1,501 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking Form</title>
-    <!-- This links your HTML to the external CSS file -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-<div class="booking-container">
-    <h2>Book Your Flight</h2>
-    
-    <form action="/search-flights" method="GET">
-        
-        <div class="trip-type">
-            <label>
-                <input type="radio" name="trip_type" value="round-trip" checked> Round Trip
-            </label>
-            <label>
-                <input type="radio" name="trip_type" value="one-way"> One Way
-            </label>
-        </div>
+html {
+    scroll-behavior: smooth;
+}
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="from">From</label>
-                <input type="text" id="from" name="origin" placeholder="City or Airport" required>
-            </div>
-            <div class="form-group">
-                <label for="to">To</label>
-                <input type="text" id="to" name="destination" placeholder="City or Airport" required>
-            </div>
-        </div>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0b0b;
+    color: white;
+}
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="departure-date">Departure Date</label>
-                <input type="date" id="departure-date" name="departure_date" required>
-            </div>
-            <div class="form-group">
-                <label for="return-date">Return Date</label>
-                <input type="date" id="return-date" name="return_date">
-            </div>
-        </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="passengers">Passengers</label>
-                <input type="number" id="passengers" name="passengers" min="1" max="9" value="1" required>
-            </div>
-            <div class="form-group">
-                <label for="cabin-class">Class</label>
-                <select id="cabin-class" name="cabin_class">
-                    <option value="economy">Economy</option>
-                    <option value="premium-economy">Premium Economy</option>
-                    <option value="business">Business</option>
-                    <option value="first">First Class</option>
-                </select>
-            </div>
-        </div>
+/* ================= HEADER ================= */
 
-        <button type="submit" class="btn-submit">Search Flights</button>
-        
-    </form>
-</div>
+header {
+    height: 80px;
+    padding: 0 7%;
+    background: rgba(10, 10, 10, 0.95);
 
-</body>
-</html>
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #e6b84a;
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    color: #ddd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #e6b84a;
+}
+
+.menu-btn {
+    display: none;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 25px;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 700px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.9),
+            rgba(0,0,0,0.35)
+        ),
+        url("https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1800&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 10%;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.small-title {
+    color: #e6b84a;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 75px;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #e6b84a;
+}
+
+.hero-content > p:not(.small-title) {
+    color: #ccc;
+    line-height: 1.7;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.hero-btn,
+.about button,
+.modal button {
+    padding: 14px 25px;
+    background: #e6b84a;
+    color: #111;
+
+    border: none;
+    border-radius: 4px;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.hero-btn:hover,
+.about button:hover,
+.modal button:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+
+/* ================= BIKES ================= */
+
+.bikes {
+    padding: 100px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title p {
+    color: #e6b84a;
+    font-size: 12px;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.section-title h2 {
+    font-size: 45px;
+}
+
+
+/* Controls */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.controls input,
+.controls select {
+    background: #171717;
+    color: white;
+
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    padding: 13px 18px;
+
+    outline: none;
+}
+
+.controls input {
+    width: 280px;
+}
+
+.controls input:focus,
+.controls select:focus {
+    border-color: #e6b84a;
+}
+
+
+/* Bike Grid */
+
+.bike-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* Bike Card */
+
+.bike-card {
+    background: #151515;
+    border: 1px solid #252525;
+
+    border-radius: 8px;
+    overflow: hidden;
+
+    transition: 0.4s;
+}
+
+.bike-card:hover {
+    transform: translateY(-8px);
+    border-color: #e6b84a;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.5);
+}
+
+
+/* Image */
+
+.image-box {
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.5s;
+}
+
+.bike-card:hover .image-box img {
+    transform: scale(1.08);
+}
+
+.image-box span {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    background: #e6b84a;
+    color: #111;
+
+    padding: 6px 10px;
+
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* Bike Info */
+
+.bike-info {
+    padding: 25px;
+}
+
+.bike-info h3 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.description {
+    color: #999;
+    line-height: 1.6;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.bike-details {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    border-top: 1px solid #292929;
+    border-bottom: 1px solid #292929;
+
+    color: #aaa;
+    font-size: 12px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.price-row strong {
+    font-size: 22px;
+    color: #e6b84a;
+}
+
+.price-row button {
+    background: transparent;
+    color: white;
+
+    border: 1px solid #555;
+
+    padding: 9px 13px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.price-row button:hover {
+    background: #e6b84a;
+    color: #111;
+    border-color: #e6b84a;
+}
+
+
+/* ================= ABOUT ================= */
+
+.about {
+    min-height: 500px;
+
+    padding: 100px 10%;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0b0b0b 20%,
+            rgba(11,11,11,0.5)
+        ),
+        url("https://images.unsplash.com/photo-1558981852-426c6c22a060?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.about > div {
+    max-width: 500px;
+}
+
+.about h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.about p:not(.small-title) {
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+
+/* ================= CONTACT ================= */
+
+.contact {
+    padding: 90px 20px;
+    text-align: center;
+    background: #111;
+}
+
+.contact p {
+    color: #aaa;
+    margin: 10px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #070707;
+    color: #666;
+}
+
+
+/* ================= MODAL ================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.85);
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2000;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+
+    background: #171717;
+
+    padding: 45px;
+
+    text-align: center;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    position: relative;
+}
+
+.modal-content h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.modal-content p:not(.small-title) {
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.close {
+    position: absolute;
+
+    right: 20px;
+    top: 15px;
+
+    background: none;
+    border: none;
+
+    color: #aaa;
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+.close:hover {
+    color: white;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 0 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .hero {
+        min-height: 600px;
+        padding: 0 7%;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+    }
+
+    .section-title h2 {
+        font-size: 35px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .controls input {
+        width: 100%;
+    }
+
+    .about h2 {
+        font-size: 38px;
+    }
+}
