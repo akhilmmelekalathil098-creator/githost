@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking Form</title>
+    <!-- This links your HTML to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="booking-container">
+    <h2>Book Your Flight</h2>
+    
+    <form action="/search-flights" method="GET">
+        
+        <div class="trip-type">
+            <label>
+                <input type="radio" name="trip_type" value="round-trip" checked> Round Trip
+            </label>
+            <label>
+                <input type="radio" name="trip_type" value="one-way"> One Way
+            </label>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="from">From</label>
+                <input type="text" id="from" name="origin" placeholder="City or Airport" required>
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <input type="text" id="to" name="destination" placeholder="City or Airport" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="departure-date">Departure Date</label>
+                <input type="date" id="departure-date" name="departure_date" required>
+            </div>
+            <div class="form-group">
+                <label for="return-date">Return Date</label>
+                <input type="date" id="return-date" name="return_date">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="passengers">Passengers</label>
+                <input type="number" id="passengers" name="passengers" min="1" max="9" value="1" required>
+            </div>
+            <div class="form-group">
+                <label for="cabin-class">Class</label>
+                <select id="cabin-class" name="cabin_class">
+                    <option value="economy">Economy</option>
+                    <option value="premium-economy">Premium Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Search Flights</button>
+        
+    </form>
+</div>
+
+</body>
+</html>
