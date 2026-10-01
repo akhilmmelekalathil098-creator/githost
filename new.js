@@ -1,25 +1,51 @@
-// ===============================
-// Scroll to Bikes
-// ===============================
+// ==========================================
+// NAVIGATION
+// ==========================================
 
-function goToBikes() {
+function toggleMenu() {
 
-    document.getElementById("bikes").scrollIntoView({
-        behavior: "smooth"
-    });
+    const navbar = document.getElementById("navbar");
+
+    navbar.classList.toggle("show");
 
 }
 
 
-// ===============================
-// Search Bikes
-// ===============================
+// ==========================================
+// SCROLL FUNCTIONS
+// ==========================================
+
+function scrollToBikes() {
+
+    document
+        .getElementById("bikes")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function scrollToBooking() {
+
+    document
+        .getElementById("bikes")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+// ==========================================
+// SEARCH
+// ==========================================
 
 function searchBikes() {
 
-    const searchValue =
+    const search =
         document
-            .getElementById("search")
+            .getElementById("searchInput")
             .value
             .toLowerCase();
 
@@ -28,13 +54,13 @@ function searchBikes() {
 
     bikes.forEach(function(bike) {
 
-        const bikeName =
+        const name =
             bike
                 .querySelector("h3")
                 .textContent
                 .toLowerCase();
 
-        if (bikeName.includes(searchValue)) {
+        if (name.includes(search)) {
 
             bike.style.display = "block";
 
@@ -49,14 +75,16 @@ function searchBikes() {
 }
 
 
-// ===============================
-// Filter Bikes
-// ===============================
+// ==========================================
+// CATEGORY FILTER
+// ==========================================
 
 function filterBikes() {
 
     const category =
-        document.getElementById("category").value;
+        document
+            .getElementById("categoryFilter")
+            .value;
 
     const bikes =
         document.querySelectorAll(".bike-card");
@@ -84,45 +112,36 @@ function filterBikes() {
 }
 
 
-// ===============================
-// Bike Details Modal
-// ===============================
+// ==========================================
+// BOOKING
+// ==========================================
 
-function showDetails(bikeName) {
+function openBooking(bikeName, price) {
 
     const modal =
-        document.getElementById("modal");
+        document.getElementById("bookingModal");
 
-    const title =
-        document.getElementById("modalTitle");
+    const selectedBike =
+        document.getElementById("selectedBike");
 
-    const description =
-        document.getElementById("modalDescription");
+    const bikeNameInput =
+        document.getElementById("bikeName");
 
-
-    title.textContent = bikeName;
-
-
-    const details = {
-
-        "Phantom R1":
-            "The Phantom R1 is a high-performance sport motorcycle designed for riders who demand speed, precision and aggressive styling.",
-
-        "Thunder X":
-            "The Thunder X is a premium cruiser offering powerful performance, comfortable riding and distinctive styling.",
-
-        "Explorer 900":
-            "The Explorer 900 is built for adventure with long-distance comfort, strong performance and versatile handling.",
-
-        "Velocity RR":
-            "The Velocity RR combines aggressive aerodynamics with incredible performance for an exciting riding experience."
-
-    };
+    const bikePriceInput =
+        document.getElementById("bikePrice");
 
 
-    description.textContent =
-        details[bikeName] ||
-        "Contact us for more information about this motorcycle.";
+    selectedBike.textContent = bikeName;
+
+    bikeNameInput.value = bikeName;
+
+    bikePriceInput.value = price;
+
+
+    document.getElementById("rentalDays").value = "1";
+
+
+    calculateTotal();
 
 
     modal.style.display = "flex";
@@ -130,79 +149,152 @@ function showDetails(bikeName) {
 }
 
 
-// ===============================
-// Close Modal
-// ===============================
+// ==========================================
+// CLOSE BOOKING
+// ==========================================
 
-function closeModal() {
+function closeBooking() {
 
-    document.getElementById("modal").style.display = "none";
+    document.getElementById("bookingModal")
+        .style.display = "none";
 
 }
 
 
-// Close modal when clicking outside
+// ==========================================
+// CALCULATE TOTAL
+// ==========================================
+
+function calculateTotal() {
+
+    const price =
+        Number(
+            document.getElementById("bikePrice").value
+        );
+
+    const days =
+        Number(
+            document.getElementById("rentalDays").value
+        );
+
+    const total = price * days;
+
+
+    document.getElementById("totalPrice")
+        .textContent =
+        "₹" + total.toLocaleString("en-IN");
+
+}
+
+
+// ==========================================
+// FORM SUBMISSION
+// ==========================================
+
+document
+    .getElementById("bookingForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("name").value;
+
+        const bike =
+            document.getElementById("bikeName").value;
+
+        const date =
+            document.getElementById("pickupDate").value;
+
+        const days =
+            document.getElementById("rentalDays").value;
+
+        const total =
+            document.getElementById("totalPrice").textContent;
+
+
+        const message =
+            `Thank you, ${name}! Your ${bike} has been reserved for ${days} day(s) from ${date}. Total: ${total}.`;
+
+
+        document.getElementById("confirmationText")
+            .textContent = message;
+
+
+        closeBooking();
+
+
+        document.getElementById("successModal")
+            .style.display = "flex";
+
+
+        this.reset();
+
+    });
+
+
+// ==========================================
+// CLOSE SUCCESS
+// ==========================================
+
+function closeSuccess() {
+
+    document.getElementById("successModal")
+        .style.display = "none";
+
+}
+
+
+// ==========================================
+// CLOSE MODALS BY CLICKING OUTSIDE
+// ==========================================
 
 window.addEventListener("click", function(event) {
 
-    const modal =
-        document.getElementById("modal");
+    const bookingModal =
+        document.getElementById("bookingModal");
 
-    if (event.target === modal) {
+    const successModal =
+        document.getElementById("successModal");
 
-        closeModal();
+
+    if (event.target === bookingModal) {
+
+        closeBooking();
+
+    }
+
+
+    if (event.target === successModal) {
+
+        closeSuccess();
 
     }
 
 });
 
 
-// ===============================
-// Contact
-// ===============================
+// ==========================================
+// SET MINIMUM PICKUP DATE
+// ==========================================
 
-function contactUs() {
+const today = new Date();
 
-    closeModal();
+const year = today.getFullYear();
 
-    document
-        .getElementById("contact")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+const month =
+    String(today.getMonth() + 1)
+        .padStart(2, "0");
 
-}
+const day =
+    String(today.getDate())
+        .padStart(2, "0");
 
 
-// ===============================
-// Mobile Menu
-// ===============================
+const todayString =
+    `${year}-${month}-${day}`;
 
-function toggleMenu() {
 
-    const nav =
-        document.querySelector("nav");
-
-    if (nav.style.display === "flex") {
-
-        nav.style.display = "none";
-
-    } else {
-
-        nav.style.display = "flex";
-
-        nav.style.flexDirection = "column";
-
-        nav.style.position = "absolute";
-
-        nav.style.top = "80px";
-
-        nav.style.right = "5%";
-
-        nav.style.background = "#151515";
-
-        nav.style.padding = "20px";
-
-    }
-
-}
+document.getElementById("pickupDate")
+    .setAttribute("min", todayString);
