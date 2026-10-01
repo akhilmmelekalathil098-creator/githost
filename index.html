@@ -3,174 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking Form</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .booking-container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 600px;
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .trip-type {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .trip-type label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #34495e;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: #4b5563;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        input:focus, select:focus {
-            border-color: #3b82f6;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: #2563eb;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: #1d4ed8;
-        }
-    </style>
+    <title>Elite Bikes - Premium Bike Sale</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="booking-container">
-    <h2>Book Your Flight</h2>
-    
-    <form action="/search-flights" method="GET">
-        
-        <!-- Trip Type Selection -->
-        <div class="trip-type">
-            <label>
-                <input type="radio" name="trip_type" value="round-trip" checked> Round Trip
-            </label>
-            <label>
-                <input type="radio" name="trip_type" value="one-way"> One Way
-            </label>
+    <!-- Header -->
+    <header>
+        <div class="logo">ELITE<span>BIKES</span></div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#bikes">Bikes</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+            <p class="small-title">PREMIUM MOTORCYCLES</p>
+
+            <h1>Ride Beyond<br><span>Limits.</span></h1>
+
+            <p>
+                Discover our collection of premium motorcycles
+                built for performance, style and adventure.
+            </p>
+
+            <button class="hero-btn" onclick="goToBikes()">
+                Explore Bikes →
+            </button>
         </div>
 
-        <!-- Origin and Destination -->
-        <div class="form-row">
-            <div class="form-group">
-                <label for="from">From</label>
-                <input type="text" id="from" name="origin" placeholder="City or Airport" required>
-            </div>
-            <div class="form-group">
-                <label for="to">To</label>
-                <input type="text" id="to" name="destination" placeholder="City or Airport" required>
-            </div>
+    </section>
+
+
+    <!-- Bike Section -->
+    <section class="bikes" id="bikes">
+
+        <div class="section-title">
+            <p>OUR COLLECTION</p>
+            <h2>Premium Bikes</h2>
         </div>
 
-        <!-- Dates -->
-        <div class="form-row">
-            <div class="form-group">
-                <label for="departure-date">Departure Date</label>
-                <input type="date" id="departure-date" name="departure_date" required>
-            </div>
-            <div class="form-group">
-                <label for="return-date">Return Date</label>
-                <input type="date" id="return-date" name="return_date">
-            </div>
+
+        <!-- Search -->
+        <div class="controls">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search bikes..."
+                onkeyup="searchBikes()"
+            >
+
+            <select id="category" onchange="filterBikes()">
+                <option value="all">All Bikes</option>
+                <option value="sport">Sport</option>
+                <option value="cruiser">Cruiser</option>
+                <option value="adventure">Adventure</option>
+            </select>
+
         </div>
 
-        <!-- Passengers and Cabin Class -->
-        <div class="form-row">
-            <div class="form-group">
-                <label for="passengers">Passengers</label>
-                <input type="number" id="passengers" name="passengers" min="1" max="9" value="1" required>
+
+        <!-- Bikes -->
+        <div class="bike-container" id="bikeContainer">
+
+
+            <!-- Bike 1 -->
+            <div class="bike-card" data-category="sport">
+
+                <div class="image-box">
+                    <img
+                        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80"
+                        alt="Sport Bike"
+                    >
+
+                    <span>SPORT</span>
+                </div>
+
+                <div class="bike-info">
+
+                    <h3>Phantom R1</h3>
+
+                    <p class="description">
+                        High-performance sport motorcycle
+                        designed for speed and precision.
+                    </p>
+
+                    <div class="bike-details">
+                        <span>998 CC</span>
+                        <span>200 HP</span>
+                        <span>6-Speed</span>
+                    </div>
+
+                    <div class="price-row">
+                        <strong>$24,999</strong>
+
+                        <button onclick="showDetails('Phantom R1')">
+                            View Details
+                        </button>
+                    </div>
+
+                </div>
+
             </div>
-            <div class="form-group">
-                <label for="cabin-class">Class</label>
-                <select id="cabin-class" name="cabin_class">
-                    <option value="economy">Economy</option>
-                    <option value="premium-economy">Premium Economy</option>
-                    <option value="business">Business</option>
-                    <option value="first">First Class</option>
-                </select>
+
+
+            <!-- Bike 2 -->
+            <div class="bike-card" data-category="cruiser">
+
+                <div class="image-box">
+                    <img
+                        src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=900&q=80"
+                        alt="Cruiser Bike"
+                    >
+
+                    <span>CRUISER</span>
+                </div>
+
+                <div class="bike-info">
+
+                    <h3>Thunder X</h3>
+
+                    <p class="description">
+                        Premium cruiser motorcycle with
+                        powerful performance and comfort.
+                    </p>
+
+                    <div class="bike-details">
+                        <span>1200 CC</span>
+                        <span>115 HP</span>
+                        <span>6-Speed</span>
+                    </div>
+
+                    <div class="price-row">
+                        <strong>$19,999</strong>
+
+                        <button onclick="showDetails('Thunder X')">
+                            View Details
+                        </button>
+                    </div>
+
+                </div>
+
             </div>
+
+
+            <!-- Bike 3 -->
+            <div class="bike-card" data-category="adventure">
+
+                <div class="image-box">
+                    <img
+                        src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=900&q=80"
+                        alt="Adventure Bike"
+                    >
+
+                    <span>ADVENTURE</span>
+                </div>
+
+                <div class="bike-info">
+
+                    <h3>Explorer 900</h3>
+
+                    <p class="description">
+                        Adventure motorcycle made for
+                        long-distance journeys.
+                    </p>
+
+                    <div class="bike-details">
+                        <span>900 CC</span>
+                        <span>105 HP</span>
+                        <span>6-Speed</span>
+                    </div>
+
+                    <div class="price-row">
+                        <strong>$21,499</strong>
+
+                        <button onclick="showDetails('Explorer 900')">
+                            View Details
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Bike 4 -->
+            <div class="bike-card" data-category="sport">
+
+                <div class="image-box">
+                    <img
+                        src="https://images.unsplash.com/photo-1615172282427-9a57ef2d142e?auto=format&fit=crop&w=900&q=80"
+                        alt="Super Sport Bike"
+                    >
+
+                    <span>SPORT</span>
+                </div>
+
+                <div class="bike-info">
+
+                    <h3>Velocity RR</h3>
+
+                    <p class="description">
+                        Aggressive styling and incredible
+                        track-inspired performance.
+                    </p>
+
+                    <div class="bike-details">
+                        <span>1000 CC</span>
+                        <span>210 HP</span>
+                        <span>6-Speed</span>
+                    </div>
+
+                    <div class="price-row">
+                        <strong>$27,999</strong>
+
+                        <button onclick="showDetails('Velocity RR')">
+                            View Details
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn-submit">Search Flights</button>
-        
-    </form>
-</div>
+    </section>
+
+
+    <!-- About -->
+    <section class="about" id="about">
+
+        <div>
+            <p class="small-title">WHY ELITE BIKES?</p>
+
+            <h2>Built For Those<br>Who Love To Ride.</h2>
+
+            <p>
+                We specialize in premium motorcycles for riders
+                who demand performance, technology and exceptional
+                design.
+            </p>
+
+            <button onclick="contactUs()">Contact Us</button>
+        </div>
+
+    </section>
+
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+
+        <div class="section-title">
+            <p>GET IN TOUCH</p>
+            <h2>Ready To Ride?</h2>
+        </div>
+
+        <p>Email: sales@elitebikes.com</p>
+        <p>Phone: +1 555 123 4567</p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Elite Bikes. All Rights Reserved.</p>
+    </footer>
+
+
+    <!-- Details Modal -->
+    <div class="modal" id="modal">
+
+        <div class="modal-content">
+
+            <button class="close" onclick="closeModal()">×</button>
+
+            <p class="small-title">PREMIUM MOTORCYCLE</p>
+
+            <h2 id="modalTitle"></h2>
+
+            <p id="modalDescription"></p>
+
+            <button onclick="contactUs()">
+                Enquire Now
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
 </html>
