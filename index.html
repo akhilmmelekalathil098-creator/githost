@@ -3,114 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Bikes - Premium Bike Sale</title>
+
+    <title>RoyalRide - Premium Bike Booking</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">ELITE<span>BIKES</span></div>
+    <!-- ================= HEADER ================= -->
 
-        <nav>
+    <header class="header">
+
+        <div class="logo">
+            ROYAL<span>RIDE</span>
+        </div>
+
+        <nav id="navbar">
             <a href="#home">Home</a>
             <a href="#bikes">Bikes</a>
-            <a href="#about">About</a>
+            <a href="#features">Features</a>
             <a href="#contact">Contact</a>
         </nav>
 
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
     </header>
 
 
-    <!-- Hero Section -->
+    <!-- ================= HERO ================= -->
+
     <section class="hero" id="home">
 
         <div class="hero-content">
-            <p class="small-title">PREMIUM MOTORCYCLES</p>
 
-            <h1>Ride Beyond<br><span>Limits.</span></h1>
-
-            <p>
-                Discover our collection of premium motorcycles
-                built for performance, style and adventure.
+            <p class="subtitle">
+                PREMIUM MOTORCYCLE EXPERIENCE
             </p>
 
-            <button class="hero-btn" onclick="goToBikes()">
-                Explore Bikes →
-            </button>
+            <h1>
+                Ride Your<br>
+                <span>Dream Bike.</span>
+            </h1>
+
+            <p class="hero-text">
+                Book premium motorcycles for your next
+                adventure. Experience power, luxury and
+                freedom on two wheels.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="scrollToBikes()"
+                >
+                    Browse Bikes
+                </button>
+
+                <button
+                    class="outline-btn"
+                    onclick="scrollToBooking()"
+                >
+                    Book Now
+                </button>
+
+            </div>
+
         </div>
 
     </section>
 
 
-    <!-- Bike Section -->
-    <section class="bikes" id="bikes">
+    <!-- ================= BIKES ================= -->
 
-        <div class="section-title">
-            <p>OUR COLLECTION</p>
-            <h2>Premium Bikes</h2>
+    <section class="bikes-section" id="bikes">
+
+        <div class="section-heading">
+
+            <p>OUR FLEET</p>
+
+            <h2>Choose Your Ride</h2>
+
         </div>
 
 
-        <!-- Search -->
+        <!-- Search & Filter -->
+
         <div class="controls">
 
             <input
                 type="text"
-                id="search"
-                placeholder="Search bikes..."
+                id="searchInput"
+                placeholder="Search motorcycle..."
                 onkeyup="searchBikes()"
             >
 
-            <select id="category" onchange="filterBikes()">
-                <option value="all">All Bikes</option>
-                <option value="sport">Sport</option>
-                <option value="cruiser">Cruiser</option>
-                <option value="adventure">Adventure</option>
+            <select
+                id="categoryFilter"
+                onchange="filterBikes()"
+            >
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="sport">
+                    Sport
+                </option>
+
+                <option value="cruiser">
+                    Cruiser
+                </option>
+
+                <option value="adventure">
+                    Adventure
+                </option>
+
             </select>
 
         </div>
 
 
-        <!-- Bikes -->
-        <div class="bike-container" id="bikeContainer">
+        <!-- Bike Cards -->
+
+        <div class="bike-grid" id="bikeGrid">
 
 
-            <!-- Bike 1 -->
-            <div class="bike-card" data-category="sport">
+            <!-- BIKE 1 -->
 
-                <div class="image-box">
+            <div
+                class="bike-card"
+                data-category="sport"
+            >
+
+                <div class="bike-image">
+
                     <img
-                        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80"
-                        alt="Sport Bike"
+                        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=80"
+                        alt="Phantom R1"
                     >
 
-                    <span>SPORT</span>
+                    <span class="tag">
+                        SPORT
+                    </span>
+
                 </div>
 
-                <div class="bike-info">
+                <div class="bike-content">
 
                     <h3>Phantom R1</h3>
 
-                    <p class="description">
-                        High-performance sport motorcycle
-                        designed for speed and precision.
+                    <p>
+                        A high-performance motorcycle
+                        designed for speed.
                     </p>
 
-                    <div class="bike-details">
-                        <span>998 CC</span>
-                        <span>200 HP</span>
-                        <span>6-Speed</span>
+                    <div class="specs">
+
+                        <span>
+                            <b>998</b>
+                            CC
+                        </span>
+
+                        <span>
+                            <b>200</b>
+                            HP
+                        </span>
+
+                        <span>
+                            <b>6</b>
+                            Gear
+                        </span>
+
                     </div>
 
-                    <div class="price-row">
-                        <strong>$24,999</strong>
+                    <div class="bike-footer">
 
-                        <button onclick="showDetails('Phantom R1')">
-                            View Details
+                        <div>
+                            <small>From</small>
+                            <strong>₹4,999/day</strong>
+                        </div>
+
+                        <button
+                            onclick="openBooking('Phantom R1', 4999)"
+                        >
+                            Book
                         </button>
+
                     </div>
 
                 </div>
@@ -118,39 +200,67 @@
             </div>
 
 
-            <!-- Bike 2 -->
-            <div class="bike-card" data-category="cruiser">
+            <!-- BIKE 2 -->
 
-                <div class="image-box">
+            <div
+                class="bike-card"
+                data-category="cruiser"
+            >
+
+                <div class="bike-image">
+
                     <img
-                        src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=900&q=80"
-                        alt="Cruiser Bike"
+                        src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1000&q=80"
+                        alt="Thunder X"
                     >
 
-                    <span>CRUISER</span>
+                    <span class="tag">
+                        CRUISER
+                    </span>
+
                 </div>
 
-                <div class="bike-info">
+                <div class="bike-content">
 
                     <h3>Thunder X</h3>
 
-                    <p class="description">
-                        Premium cruiser motorcycle with
-                        powerful performance and comfort.
+                    <p>
+                        Premium cruiser built for
+                        comfortable long rides.
                     </p>
 
-                    <div class="bike-details">
-                        <span>1200 CC</span>
-                        <span>115 HP</span>
-                        <span>6-Speed</span>
+                    <div class="specs">
+
+                        <span>
+                            <b>1200</b>
+                            CC
+                        </span>
+
+                        <span>
+                            <b>115</b>
+                            HP
+                        </span>
+
+                        <span>
+                            <b>6</b>
+                            Gear
+                        </span>
+
                     </div>
 
-                    <div class="price-row">
-                        <strong>$19,999</strong>
+                    <div class="bike-footer">
 
-                        <button onclick="showDetails('Thunder X')">
-                            View Details
+                        <div>
+                            <small>From</small>
+                            <strong>₹3,999/day</strong>
+                        </div>
+
+                        <button
+                            onclick="openBooking('Thunder X', 3999)"
+                        >
+                            Book
                         </button>
+
                     </div>
 
                 </div>
@@ -158,39 +268,67 @@
             </div>
 
 
-            <!-- Bike 3 -->
-            <div class="bike-card" data-category="adventure">
+            <!-- BIKE 3 -->
 
-                <div class="image-box">
+            <div
+                class="bike-card"
+                data-category="adventure"
+            >
+
+                <div class="bike-image">
+
                     <img
-                        src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=900&q=80"
-                        alt="Adventure Bike"
+                        src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=1000&q=80"
+                        alt="Explorer 900"
                     >
 
-                    <span>ADVENTURE</span>
+                    <span class="tag">
+                        ADVENTURE
+                    </span>
+
                 </div>
 
-                <div class="bike-info">
+                <div class="bike-content">
 
                     <h3>Explorer 900</h3>
 
-                    <p class="description">
-                        Adventure motorcycle made for
-                        long-distance journeys.
+                    <p>
+                        Adventure bike built for
+                        unforgettable journeys.
                     </p>
 
-                    <div class="bike-details">
-                        <span>900 CC</span>
-                        <span>105 HP</span>
-                        <span>6-Speed</span>
+                    <div class="specs">
+
+                        <span>
+                            <b>900</b>
+                            CC
+                        </span>
+
+                        <span>
+                            <b>105</b>
+                            HP
+                        </span>
+
+                        <span>
+                            <b>6</b>
+                            Gear
+                        </span>
+
                     </div>
 
-                    <div class="price-row">
-                        <strong>$21,499</strong>
+                    <div class="bike-footer">
 
-                        <button onclick="showDetails('Explorer 900')">
-                            View Details
+                        <div>
+                            <small>From</small>
+                            <strong>₹4,499/day</strong>
+                        </div>
+
+                        <button
+                            onclick="openBooking('Explorer 900', 4499)"
+                        >
+                            Book
                         </button>
+
                     </div>
 
                 </div>
@@ -198,39 +336,67 @@
             </div>
 
 
-            <!-- Bike 4 -->
-            <div class="bike-card" data-category="sport">
+            <!-- BIKE 4 -->
 
-                <div class="image-box">
+            <div
+                class="bike-card"
+                data-category="sport"
+            >
+
+                <div class="bike-image">
+
                     <img
-                        src="https://images.unsplash.com/photo-1615172282427-9a57ef2d142e?auto=format&fit=crop&w=900&q=80"
-                        alt="Super Sport Bike"
+                        src="https://images.unsplash.com/photo-1615172282427-9a57ef2d142e?auto=format&fit=crop&w=1000&q=80"
+                        alt="Velocity RR"
                     >
 
-                    <span>SPORT</span>
+                    <span class="tag">
+                        SUPER SPORT
+                    </span>
+
                 </div>
 
-                <div class="bike-info">
+                <div class="bike-content">
 
                     <h3>Velocity RR</h3>
 
-                    <p class="description">
-                        Aggressive styling and incredible
-                        track-inspired performance.
+                    <p>
+                        Track-inspired performance
+                        with aggressive styling.
                     </p>
 
-                    <div class="bike-details">
-                        <span>1000 CC</span>
-                        <span>210 HP</span>
-                        <span>6-Speed</span>
+                    <div class="specs">
+
+                        <span>
+                            <b>1000</b>
+                            CC
+                        </span>
+
+                        <span>
+                            <b>210</b>
+                            HP
+                        </span>
+
+                        <span>
+                            <b>6</b>
+                            Gear
+                        </span>
+
                     </div>
 
-                    <div class="price-row">
-                        <strong>$27,999</strong>
+                    <div class="bike-footer">
 
-                        <button onclick="showDetails('Velocity RR')">
-                            View Details
+                        <div>
+                            <small>From</small>
+                            <strong>₹5,499/day</strong>
+                        </div>
+
+                        <button
+                            onclick="openBooking('Velocity RR', 5499)"
+                        >
+                            Book
                         </button>
+
                     </div>
 
                 </div>
@@ -242,66 +408,346 @@
     </section>
 
 
-    <!-- About -->
-    <section class="about" id="about">
+    <!-- ================= FEATURES ================= -->
 
-        <div>
-            <p class="small-title">WHY ELITE BIKES?</p>
+    <section class="features" id="features">
 
-            <h2>Built For Those<br>Who Love To Ride.</h2>
+        <div class="section-heading">
 
-            <p>
-                We specialize in premium motorcycles for riders
-                who demand performance, technology and exceptional
-                design.
+            <p>WHY ROYALRIDE</p>
+
+            <h2>Premium From Start To Finish</h2>
+
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🏍️
+                </div>
+
+                <h3>Premium Fleet</h3>
+
+                <p>
+                    Carefully selected premium motorcycles
+                    maintained to the highest standards.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🛡️
+                </div>
+
+                <h3>Fully Insured</h3>
+
+                <p>
+                    Ride with confidence with our
+                    comprehensive rental protection.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>Easy Booking</h3>
+
+                <p>
+                    Select your motorcycle, choose your
+                    date and confirm your booking.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📍
+                </div>
+
+                <h3>Flexible Pickup</h3>
+
+                <p>
+                    Convenient pickup locations and
+                    flexible rental options.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= BOOKING MODAL ================= -->
+
+    <div
+        class="modal"
+        id="bookingModal"
+    >
+
+        <div class="booking-box">
+
+            <button
+                class="close-btn"
+                onclick="closeBooking()"
+            >
+                ×
+            </button>
+
+
+            <div class="booking-title">
+
+                <p>BOOK YOUR RIDE</p>
+
+                <h2 id="selectedBike">
+                    Motorcycle
+                </h2>
+
+            </div>
+
+
+            <form id="bookingForm">
+
+                <input
+                    type="hidden"
+                    id="bikeName"
+                >
+
+                <input
+                    type="hidden"
+                    id="bikePrice"
+                >
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Phone number"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Pickup Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="pickupDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Rental Days
+                        </label>
+
+                        <select
+                            id="rentalDays"
+                            onchange="calculateTotal()"
+                        >
+
+                            <option value="1">
+                                1 Day
+                            </option>
+
+                            <option value="2">
+                                2 Days
+                            </option>
+
+                            <option value="3">
+                                3 Days
+                            </option>
+
+                            <option value="5">
+                                5 Days
+                            </option>
+
+                            <option value="7">
+                                7 Days
+                            </option>
+
+                            <option value="10">
+                                10 Days
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Pickup Location
+                    </label>
+
+                    <select id="location">
+
+                        <option>
+                            Kochi
+                        </option>
+
+                        <option>
+                            Trivandrum
+                        </option>
+
+                        <option>
+                            Kozhikode
+                        </option>
+
+                        <option>
+                            Bangalore
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Total -->
+
+                <div class="booking-total">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong id="totalPrice">
+                        ₹4,999
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="confirm-btn"
+                >
+                    Confirm Booking
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SUCCESS MODAL ================= -->
+
+    <div
+        class="success-modal"
+        id="successModal"
+    >
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>Booking Confirmed!</h2>
+
+            <p id="confirmationText">
+                Your motorcycle has been booked successfully.
             </p>
 
-            <button onclick="contactUs()">Contact Us</button>
-        </div>
-
-    </section>
-
-
-    <!-- Contact -->
-    <section class="contact" id="contact">
-
-        <div class="section-title">
-            <p>GET IN TOUCH</p>
-            <h2>Ready To Ride?</h2>
-        </div>
-
-        <p>Email: sales@elitebikes.com</p>
-        <p>Phone: +1 555 123 4567</p>
-
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Elite Bikes. All Rights Reserved.</p>
-    </footer>
-
-
-    <!-- Details Modal -->
-    <div class="modal" id="modal">
-
-        <div class="modal-content">
-
-            <button class="close" onclick="closeModal()">×</button>
-
-            <p class="small-title">PREMIUM MOTORCYCLE</p>
-
-            <h2 id="modalTitle"></h2>
-
-            <p id="modalDescription"></p>
-
-            <button onclick="contactUs()">
-                Enquire Now
+            <button
+                onclick="closeSuccess()"
+            >
+                Done
             </button>
 
         </div>
 
     </div>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+        <div>
+
+            <p>CONTACT US</p>
+
+            <h2>Ready To Ride?</h2>
+
+            <p>
+                sales@royalride.com
+                &nbsp; | &nbsp;
+                +91 98765 43210
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="logo">
+            ROYAL<span>RIDE</span>
+        </div>
+
+        <p>
+            © 2026 RoyalRide. Premium Motorcycle Rentals.
+        </p>
+
+    </footer>
 
 
     <script src="script.js"></script>
